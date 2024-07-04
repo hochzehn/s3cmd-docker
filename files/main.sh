@@ -34,6 +34,20 @@ if [ "${s3_host_base}" != "" ]; then
   echo "host_base = ${s3_host_base}" >> "$S3CMD_CONFIG"
 fi
 
+#
+# Add bucket_location
+#
+if [ "${bucket_location}" != "" ]; then
+  echo "bucket_location = ${bucket_location}" >> "$S3CMD_CONFIG"
+fi
+
+#
+# Add host_bucket
+#
+if [ "${host_bucket}" != "" ]; then
+  echo "host_bucket = ${host_bucket}" >> "$S3CMD_CONFIG"
+fi
+
 # Check whether to run a pre-defined command
 if [ -n "${cmd}" ]; then
   #

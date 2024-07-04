@@ -1,11 +1,10 @@
-FROM alpine:3.4
+FROM python:3.9.19-alpine3.20
 
-RUN apk add --no-cache python py-pip py-setuptools git ca-certificates \
- && pip install --no-cache-dir python-dateutil python-magic \
- && git clone --depth=1 https://github.com/s3tools/s3cmd.git /opt/s3cmd \
- && rm -rf /opt/s3cmd/.git \
- && ln -s /opt/s3cmd/s3cmd /usr/bin/s3cmd \
- && apk del py-pip py-setuptools git
+RUN apk add --no-cache git ca-certificates
+RUN pip install --no-cache-dir python-dateutil python-magic
+RUN git clone --depth=1 https://github.com/s3tools/s3cmd /opt/s3cmd
+RUN rm -rf /opt/s3cmd/.git
+RUN ln -s /opt/s3cmd/s3cmd /usr/bin/s3cmd
 
 ADD ./files/.s3cfg /root/.s3cfg
 ADD ./files/main.sh /opt/main.sh
